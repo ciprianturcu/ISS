@@ -17,7 +17,8 @@ export const AppMenu = () => {
 	const [user, setUser] = useState<User>({
 		id: 1,
         username: '',
-        email: ''
+        email: '',
+		role: '',
     });
 
 	useEffect(() => {
@@ -26,6 +27,7 @@ export const AppMenu = () => {
 			if (token !== null) {
 			const decoded: any = jwt_decode(token);
 			const user = decoded['user'];
+			console.log(user);
 			setUser(user);
 			}
 			else {
@@ -33,6 +35,7 @@ export const AppMenu = () => {
 				id: 1,
 				username: '',
 				email: '',
+				role: '',
 				})
 			}
 		}, 1000);
