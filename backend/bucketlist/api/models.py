@@ -17,11 +17,11 @@ class VacationDestination(models.Model):
 
 
 class PublicVacationDestination(VacationDestination):
-    added_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    pass
 
 
 class PrivateVacationDestination(VacationDestination):
-    pass
+    added_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class UserProfile(models.Model):
