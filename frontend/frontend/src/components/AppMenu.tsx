@@ -15,7 +15,8 @@ export const AppMenu = () => {
 	const [user, setUser] = useState<User>({
 		id: 1,
         username: '',
-        email: ''
+        email: '',
+		role: ''
     });
 
 	useEffect(() => {
@@ -24,6 +25,7 @@ export const AppMenu = () => {
 			if (token !== null) {
 			const decoded: any = jwt_decode(token);
 			const user = decoded['user'];
+			console.log(user);
 			setUser(user);
 			}
 			else {
@@ -31,6 +33,7 @@ export const AppMenu = () => {
 				id: 1,
 				username: '',
 				email: '',
+				role: '',
 				})
 			}
 		}, 1000);
@@ -91,52 +94,6 @@ export const AppMenu = () => {
 						Logout
 						</Button>     
 					)}
-
-					{/* <Button
-						variant={path.startsWith("/tennisplayers") ? "outlined" : "text"}
-						to="/tennisplayers"
-						component={Link}
-						color="inherit"
-						sx={{ mr: 5 }}
-						startIcon={<EmojiEventsIcon />}>
-						Tennis Players
-					</Button>
-					<Button
-						variant={path.startsWith("/coaches") ? "outlined" : "text"}
-						to="/coaches"
-						component={Link}
-						color="inherit"
-						sx={{ mr: 5 }}
-						startIcon={<SportsIcon />}>
-						Coaches 
-					</Button>
-					<Button
-						variant={path.startsWith("/tournaments") ? "outlined" : "text"}
-						to="/tournaments"
-						component={Link}
-						color="inherit"
-						sx={{ mr: 5 }}
-						startIcon={<FestivalIcon />}>
-						Tournaments 
-					</Button>
-					<Button
-						variant={path.startsWith("/tournamentregs") ? "outlined" : "text"}
-						to="/tournamentregs"
-						component={Link}
-						color="inherit"
-						sx={{ mr: 5 }}
-						startIcon={<BorderColorIcon />}>
-						Registrations 
-					</Button>
-					<Button
-						variant={path.startsWith("/allstats") ? "outlined" : "text"}
-						to="/allstats"
-						component={Link}
-						color="inherit"
-						sx={{ mr: 5 }}
-						startIcon={<InsightsIcon />}>
-						Statistics
-					</Button> */}
 				</Toolbar>
 			</AppBar>
 		</Box>

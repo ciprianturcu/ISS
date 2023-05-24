@@ -29,6 +29,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             "id": self.user.id,
             "username": self.user.username,
             "email": self.user.email,
+            "role": user.role,
         }
 
         data["refresh"] = str(refresh)
@@ -102,4 +103,5 @@ class UserProfileDetailSerializer(serializers.ModelSerializer):
         fields = (
             "username",
             "email",
+            "role",
         )
