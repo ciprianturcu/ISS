@@ -85,7 +85,6 @@ export const AppMenu = () => {
 						</>      		
 					)}
 					{user.username !== '' && (
-						<>
 						<Button
 						variant={path.startsWith("/logout") ? "outlined" : "text"}
 						to="/logout"
@@ -95,7 +94,10 @@ export const AppMenu = () => {
 						startIcon={<LogoutIcon />}
 						>
 						Logout
-						</Button>   
+						</Button>   	
+					)}
+					{user.username !== '' && user.role === 'user' && (
+						
 						<Button
 						variant={path.startsWith("/bucket-list") ? "outlined" : "text"}
 						to="/bucket-list"
@@ -106,7 +108,7 @@ export const AppMenu = () => {
 						>
 						Bucket List
 						</Button>  
-						</>	
+					
 						
 					)}
 				</Toolbar>
