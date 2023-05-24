@@ -9,6 +9,7 @@ export const AppHome = () => {
 		id: 1,
         username: '',
         email: '',
+        role: '',
     });
 
     useEffect(() => {
