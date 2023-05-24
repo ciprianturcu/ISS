@@ -7,6 +7,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useEffect, useState } from "react";
 import { User } from "../models/User";
 import jwt_decode from 'jwt-decode';
+import React from "react";
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 export const AppMenu = () => {
     const location = useLocation();
@@ -80,6 +82,7 @@ export const AppMenu = () => {
 						</>      		
 					)}
 					{user.username !== '' && (
+						<>
 						<Button
 						variant={path.startsWith("/logout") ? "outlined" : "text"}
 						to="/logout"
@@ -89,54 +92,20 @@ export const AppMenu = () => {
 						startIcon={<LogoutIcon />}
 						>
 						Logout
-						</Button>     
+						</Button>   
+						<Button
+						variant={path.startsWith("/bucket-list") ? "outlined" : "text"}
+						to="/bucket-list"
+						component={Link}
+						color="inherit"
+						sx={{ mr: 5 }}
+						startIcon={<FormatListBulletedIcon />}
+						>
+						Bucket List
+						</Button>  
+						</>	
+						
 					)}
-
-					{/* <Button
-						variant={path.startsWith("/tennisplayers") ? "outlined" : "text"}
-						to="/tennisplayers"
-						component={Link}
-						color="inherit"
-						sx={{ mr: 5 }}
-						startIcon={<EmojiEventsIcon />}>
-						Tennis Players
-					</Button>
-					<Button
-						variant={path.startsWith("/coaches") ? "outlined" : "text"}
-						to="/coaches"
-						component={Link}
-						color="inherit"
-						sx={{ mr: 5 }}
-						startIcon={<SportsIcon />}>
-						Coaches 
-					</Button>
-					<Button
-						variant={path.startsWith("/tournaments") ? "outlined" : "text"}
-						to="/tournaments"
-						component={Link}
-						color="inherit"
-						sx={{ mr: 5 }}
-						startIcon={<FestivalIcon />}>
-						Tournaments 
-					</Button>
-					<Button
-						variant={path.startsWith("/tournamentregs") ? "outlined" : "text"}
-						to="/tournamentregs"
-						component={Link}
-						color="inherit"
-						sx={{ mr: 5 }}
-						startIcon={<BorderColorIcon />}>
-						Registrations 
-					</Button>
-					<Button
-						variant={path.startsWith("/allstats") ? "outlined" : "text"}
-						to="/allstats"
-						component={Link}
-						color="inherit"
-						sx={{ mr: 5 }}
-						startIcon={<InsightsIcon />}>
-						Statistics
-					</Button> */}
 				</Toolbar>
 			</AppBar>
 		</Box>
