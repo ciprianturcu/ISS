@@ -44,7 +44,7 @@ function App() {
           <Route path="/activate/:activationCode" element={<ActivateAccount />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/logout" element={<LogoutForm />} />
-
+          {/*<Route path="public-destination/add-bucket-list" element={< />} />*/}
         </Routes>
       </Router>
     </React.Fragment>
