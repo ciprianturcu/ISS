@@ -31,7 +31,7 @@ export const PublicVacDestShowAll = () => {
         const response = await fetch(
             `${BACKEND_API_URL}/publicdestination/`
         );
-        const {count, next, previous, results} = await response.json();
+        const results = await response.json();
         setDestinations(results);
         setLoading(false);
 
@@ -49,7 +49,7 @@ export const PublicVacDestShowAll = () => {
             {!loading && destinations.length === 0 && <div>No public destinations found!</div>}
 
         {!loading && (
-            <IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination/add`}>
+            <IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination/add-public`}>
                         <Tooltip title="Add a new public destination" arrow>
                             <AddCircleIcon color="primary" />
                         </Tooltip>
@@ -79,7 +79,7 @@ export const PublicVacDestShowAll = () => {
                                 </TableCell>
                                 <TableCell align="center">{publicVacDest.geolocation}</TableCell>
                                 <TableCell align="center">{publicVacDest.title}</TableCell>
-                                <TableCell align="center"><a href={`${publicVacDest.imageURL}`}>Link</a></TableCell>
+                                <TableCell align="center"><a href={publicVacDest.imageURL}>Link</a></TableCell>
                                 <TableCell align="center">{publicVacDest.description}</TableCell>
                                 <TableCell align="center">{publicVacDest.arrival_date}</TableCell>
                                 <TableCell align="center">{publicVacDest.departure_date}</TableCell>
@@ -93,11 +93,11 @@ export const PublicVacDestShowAll = () => {
 											</Tooltip>
 										</IconButton>
 
-										<IconButton component={Link} sx={{ mr: 3 }} to={`/public-destinations`}>
+										<IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination/show-all`}>
 											<EditIcon />
 										</IconButton>
 
-										<IconButton component={Link} sx={{ mr: 3 }} to={`/public-destinations`}>
+										<IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination/show-all`}>
 											<DeleteForeverIcon sx={{ color: "red" }} />
 										</IconButton>
 									</TableCell>

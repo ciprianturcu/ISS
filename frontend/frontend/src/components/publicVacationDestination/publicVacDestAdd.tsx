@@ -27,11 +27,11 @@ export const PublicVacDestAdd = () => {
             {
                 throw new Error("Arrival Date cannot be before Departure Date");
             }
-            const response = await axios.post(`${BACKEND_API_URL}/publicdestination/`);
+            const response = await axios.post(`${BACKEND_API_URL}/publicdestination/`, destination);
             if (response.status < 200 || response.status >= 300) {
 				throw new Error("An error occured while adding the destination!");
 			} else {
-				navigate("/public-destination");
+				navigate("/public-destination/show-all");
 			}
         } catch (error) {
 			toast.error((error as {message: string}).message);
@@ -44,7 +44,7 @@ export const PublicVacDestAdd = () => {
         <Container>
 			<Card>
 				<CardContent>
-					<IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination`}>
+					<IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination/show-all`}>
 						<ArrowBackIcon />
 					</IconButton>{" "}
 					<form onSubmit={addDestination}>

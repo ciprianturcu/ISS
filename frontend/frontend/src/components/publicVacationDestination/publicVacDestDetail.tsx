@@ -25,24 +25,24 @@ export const PublicVacDestDetail = () => {
         <Container>
         <Card>
             <CardContent>
-                <IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination`}>
+                <IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination/show-all`}>
                     <ArrowBackIcon />
                 </IconButton>{" "}
                 <h1 style={{textAlign:"center"}}>Destination Details</h1>
                 <p style={{textAlign:"left"}}>Location: {destination?.geolocation}</p>
                 <p style={{textAlign:"left"}}>Title: {destination?.title}</p>
-                <p style={{textAlign:"left"}}>Image: <a href={`${destination?.imageURL}`}>Link</a></p>
+                <p style={{textAlign:"left"}}>Image: <a href={destination?.imageURL}>Link</a></p>
                 <p style={{textAlign:"left"}}>Description: {destination?.description}</p>
                 <p style={{textAlign:"left"}}>Arrival Date: {destination?.arrival_date}</p>
                 <p style={{textAlign:"left"}}>Departure Date: {destination?.departure_date}</p>
 
             </CardContent>
             <CardActions>
-                <IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination`}>
+                <IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination/${destination?.id}`}>
                     <EditIcon />
                 </IconButton>
 
-                <IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination`}>
+                <IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination/${destination?.id}`}>
                     <DeleteForeverIcon sx={{ color: "red" }} />
                 </IconButton>
             </CardActions>
