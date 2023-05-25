@@ -8,33 +8,16 @@ import { LoginForm } from './components/auth/Login';
 import { LogoutForm } from './components/auth/Logout';
 import { AppMenu } from './components/AppMenu';
 import { AppHome } from './components/AppHome';
+import { PrivateVacDestAddPrivate } from './components/privateVacationDestination/privateVacDestAddPrivate';
+import { PrivatecVacDestBucketList } from './components/privateVacationDestination/privateVacDestBucketList';
+import { PrivateVacDestShowAll } from './components/privateVacationDestination/privateVacDestShowAllPublic';
+import { PublicVacDestShowAll } from './components/publicVacationDestination/publicVacDestShowAll';
+import { PrivateVacDestDetail } from './components/privateVacationDestination/privateVacDestDetail';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    // <>
-    //   <div>
-    //     <a href="https://vitejs.dev" target="_blank">
-    //       <img src={viteLogo} className="logo" alt="Vite logo" />
-    //     </a>
-    //     <a href="https://react.dev" target="_blank">
-    //       <img src={reactLogo} className="logo react" alt="React logo" />
-    //     </a>
-    //   </div>
-    //   <h1>Vite + React</h1>
-    //   <div className="card">
-    //     <button onClick={() => setCount((count) => count + 1)}>
-    //       count is {count}
-    //     </button>
-    //     <p>
-    //       Edit <code>src/App.tsx</code> and save to test HMR
-    //     </p>
-    //   </div>
-    //   <p className="read-the-docs">
-    //     Click on the Vite and React logos to learn more
-    //   </p>
-    // </>
     <React.Fragment>
       <Router>
         <AppMenu/>
@@ -44,7 +27,12 @@ function App() {
           <Route path="/activate/:activationCode" element={<ActivateAccount />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/logout" element={<LogoutForm />} />
-          {/*<Route path="public-destination/add-bucket-list" element={< />} />*/}
+          <Route path='/private-destination/bucket-list' element = {<PrivatecVacDestBucketList/> }/>
+          <Route path='/private-destination/add-private' element={<PrivateVacDestAddPrivate/>} />
+          <Route path='/private-destination/show-public' element={<PrivateVacDestShowAll/>} />
+          <Route path='/public-destination/' element={<PublicVacDestShowAll/>} />
+          <Route path='/private-destination/:destinationId' element={<PrivateVacDestDetail/>} />
+          {/* <Route path='/private-destination/add-public' element={<PrivateVacDestAddPublic/>} />  good,we just have to implement add-public*/}
         </Routes>
       </Router>
     </React.Fragment>

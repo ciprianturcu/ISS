@@ -30,36 +30,7 @@ export const AppHome = () => {
 			{user.username !== '' && (
 			<>
 				<h1>Welcome back, {user.username} !</h1>
-				<Container>
-				<Card style={{ backgroundColor: "whitesmoke", color: "whitesmoke" }}>
-					<CardContent style={{ backgroundColor: "whitesmoke", color: "whitesmoke" }}>
-						<TextField
-							id="username"
-							label="Username"
-							variant="outlined"
-							fullWidth
-							sx={{ mb: 2, color: "whitesmoke !important" }}
-							value={user.username}
-							InputProps={{
-								readOnly: true,
-							}}
-						/>
-
-						<TextField
-							id="email"
-							label="Email"
-							variant="outlined"
-							fullWidth
-							sx={{ mb: 2, color: "whitesmoke !important" }}
-							value={user.email}
-							InputProps={{
-								readOnly: true,
-							}}
-						/>
-
-					</CardContent>
-				</Card>
-			</Container>
+				
 			</>
 		)}
 	</>

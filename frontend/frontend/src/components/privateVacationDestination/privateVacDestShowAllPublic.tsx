@@ -18,58 +18,75 @@ import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BACKEND_API_URL } from "../../constants";
-import { PrivateVacationDestination } from "../../models/PrivateVacationDestination";
 import { PublicVacationDestination } from "../../models/PublicVacationDestination";
+import { PrivateVacationDestination } from "../../models/PrivateVacationDestination";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { AddPublicDestToBucket } from "../service/addPublicDestToBucket";
 
 export const PrivateVacDestShowAll = () => {
     const [loading, setLoading] = useState(true);
-    const [destinations, setDestinations] = useState([]);
+    const [destinations_public, setDestinations] = useState([]);
 
     const fetchPublicDestinations =async () => {
         setLoading(true);
         const response = await fetch(
             `${BACKEND_API_URL}/publicdestination/`
         );
-        const {count, next, previous, results} = await response.json();
+        console.log(response);
+        const results = await response.json();
+        console.log(results);
         setDestinations(results);
         setLoading(false);
 
-    }
+    };
 
-    const fetchPrivateDestinations =async () => {
-        setLoading(true);
-        const response = await fetch(
-            `${BACKEND_API_URL}/privatedestination/`
-        );
-        const {count, next, previous, results} = await response.json();
-        setDestinations(results);
-        setLoading(false);
 
+    const [destination, setDestination] = useState({
+        geolocation: "",
+        title: "",
+        imageURL: "",
+        description: "",
+        arrival_date: "",
+        departure_date: "",
+        added_by: localStorage.getItem("user_id"),
+    });
+
+    // const [destination, setDestination] = useState<PrivateVacationDestination>();
+
+    const navigate = useNavigate();
+    const handleClick=async (destination:PublicVacationDestination)=>{ 
+        try{
+        const response= AddPublicDestToBucket(destination);
+        if((await response).status==200){ 
+            navigate("/private-destination/bucket-list");
+            toast.success("Public destination added to bucket!");}
+        else if((await response).status==400)
+            throw new Error("Public destination already exists in bucket!");
+        else
+            toast.error("Something went wrong!");
+     } catch (error) {
+        toast.error((error as {message: string}).message);
+        console.log(error);
     }
+       
+    };
+
 
     useEffect(() => {
         fetchPublicDestinations();
-        /*fetchPrivateDestinations();*/
     }, []);
-
+    // console.log(destinations);
     return(
         <Container>
         <h1 style={{marginTop:"65px"}}>All Public Destinations</h1>
         {loading && <CircularProgress />}
 
-            {!loading && destinations.length == 0 && <div>No public destinations found!</div>}
+        {!loading && destinations_public.length == 0 && <div>No public destinations found!</div>}
 
-        {!loading && (
-            <IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination/add-bucket-list`}>
-                        <Tooltip title="Add public destination to bucket list" arrow>
-                            <AddCircleIcon color="primary" />
-                        </Tooltip>
-                    </IconButton>
-        )}
-
-        {!loading && destinations.length > 0 && (
+        {!loading && destinations_public.length > 0 && (
             <>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 900 }} aria-label="simple table">
@@ -85,7 +102,7 @@ export const PrivateVacDestShowAll = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {destinations.map((publicVacDest:PublicVacationDestination, index) => (
+                        {destinations_public.map((publicVacDest:PublicVacationDestination, index) => (
                             <TableRow key={publicVacDest.id}>
                                 <TableCell component="th" scope="row">
                                     {index + 1}
@@ -105,12 +122,14 @@ export const PrivateVacDestShowAll = () => {
 												<ReadMoreIcon color="primary" />
 											</Tooltip>
 										</IconButton>
-                                        <IconButton
+                                        <IconButton 
+                                            onClick={handleClick.bind(null, publicVacDest)}
 											component={Link}
 											sx={{ mr: 3 }}
-											to={`/public-destination/add-bucket-list`}>
+											to={`/private-destination/show-public`}
+                                            >
 											<Tooltip title="Add public destination to bucket list" arrow>
-												<ReadMoreIcon color="primary" />
+                                                <AddCircleIcon color="primary" />
 											</Tooltip>
 										</IconButton>
 									</TableCell>

@@ -23,7 +23,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         refresh = self.get_token(self.user)
 
-        user = UserProfile.objects.get(user_id = self.user.username)
+        user = UserProfile.objects.get(user_id=self.user.username)
 
         refresh["user"] = {
             "id": self.user.id,
@@ -44,12 +44,48 @@ class PrivateVacationDestinationSerializer(DynamicSerializer):
         fields = "__all__"
         depth = 1
 
+    def validate(self, attrs):
+        title = attrs.get('title')
+        geolocation = attrs.get('geolocation')
+        imageURL = attrs.get('imageURL')
+        description = attrs.get('description')
+        arrival_date = attrs.get('arrival_date')
+        departure_date = attrs.get('departure_date')
+        # Perform the uniqueness check
+        if title and geolocation and imageURL and description and arrival_date and departure_date:
+            queryset = PrivateVacationDestination.objects.filter(title=title, geolocation=geolocation,
+                                                                 imageURL=imageURL, description=description,
+                                                                 arrival_date=arrival_date,
+                                                                 departure_date=departure_date)
+            if queryset.exists():
+                raise serializers.ValidationError("Object with these attributes already exists.")
+
+        return attrs
+
 
 class PublicVacationDestinationSerializer(DynamicSerializer):
     class Meta:
         model = PublicVacationDestination
         fields = "__all__"
         depth = 1
+
+    def validate(self, attrs):
+        title = attrs.get('title')
+        geolocation = attrs.get('geolocation')
+        imageURL = attrs.get('imageURL')
+        description = attrs.get('description')
+        arrival_date = attrs.get('arrival_date')
+        departure_date = attrs.get('departure_date')
+        # Perform the uniqueness check
+        if title and geolocation and imageURL and description and arrival_date and departure_date:
+            queryset = PrivateVacationDestination.objects.filter(title=title, geolocation=geolocation,
+                                                                 imageURL=imageURL, description=description,
+                                                                 arrival_date=arrival_date,
+                                                                 departure_date=departure_date)
+            if queryset.exists():
+                raise serializers.ValidationError("Object with these attributes already exists.")
+
+        return attrs
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -6,5 +6,5 @@ export interface PrivateVacationDestination{
     description: string;
     arrival_date: string;
     departure_date: string;
-    added_by:string;
+    added_by:number;
 }
