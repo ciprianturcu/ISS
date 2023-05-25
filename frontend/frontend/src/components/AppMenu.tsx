@@ -27,7 +27,7 @@ export const AppMenu = () => {
 			if (token !== null) {
 			const decoded: any = jwt_decode(token);
 			const user = decoded['user'];
-			console.log(user);
+			// console.log(user);
 			setUser(user);
 			}
 			else {
@@ -97,10 +97,20 @@ export const AppMenu = () => {
 						</Button>   	
 					)}
 					{user.username !== '' && user.role === 'user' && (
-						
+						<>
 						<Button
-						variant={path.startsWith("/bucket-list") ? "outlined" : "text"}
-						to="/bucket-list"
+						variant={path.startsWith("/private-destination/show-public") ? "outlined" : "text"}
+						to="/private-destination/show-public"
+						component={Link}
+						color="inherit"
+						sx={{ mr: 5 }}
+						startIcon={<FormatListBulletedIcon />}
+						>
+						Public Destinations
+						</Button>  
+						<Button
+						variant={path.startsWith("/private-destination/bucket-list") ? "outlined" : "text"}
+						to="/private-destination/bucket-list"
 						component={Link}
 						color="inherit"
 						sx={{ mr: 5 }}
@@ -108,6 +118,9 @@ export const AppMenu = () => {
 						>
 						Bucket List
 						</Button>  
+
+
+						</>
 					
 						
 					)}

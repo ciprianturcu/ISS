@@ -20,18 +20,20 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Link } from "react-router-dom";
 import { BACKEND_API_URL } from "../../constants";
-import { PublicVacationDestination } from "../../models/PublicVacationDestination";
+import { PrivateVacationDestination } from "../../models/PrivateVacationDestination";
 
-export const PublicVacDestShowAll = () => {
+
+export const PrivatecVacDestBucketList = () => {
     const [loading, setLoading] = useState(true);
     const [destinations, setDestinations] = useState([]);
 
     const fetchDestinations =async () => {
         setLoading(true);
         const response = await fetch(
-            `${BACKEND_API_URL}/publicdestination/`
+            `${BACKEND_API_URL}/privatedestination/`
         );
-        const {count, next, previous, results} = await response.json();
+        const results = await response.json();
+        console.log(results);
         setDestinations(results);
         setLoading(false);
 
@@ -43,20 +45,20 @@ export const PublicVacDestShowAll = () => {
 
     return(
         <Container>
-        <h1 style={{marginTop:"65px"}}>All Public Destinations</h1>
+        <h1 style={{marginTop:"65px"}}>All Private Destinations From BucketList</h1>
         {loading && <CircularProgress />}
 
-            {!loading && destinations.length === 0 && <div>No public destinations found!</div>}
+            {!loading && destinations.length == 0 && <div>No private destinations found!</div>}
 
         {!loading && (
-            <IconButton component={Link} sx={{ mr: 3 }} to={`/public-destination/add`}>
-                        <Tooltip title="Add a new public destination" arrow>
+            <IconButton component={Link} sx={{ mr: 3 }} to={`/private-destination/add-private`}>
+                        <Tooltip title="Add a new private destination" arrow>
                             <AddCircleIcon color="primary" />
                         </Tooltip>
                     </IconButton>
         )}
 
-        {!loading && destinations.length > 0 && (
+        {!loading && destinations.length > 0 &&  (
             <>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 900 }} aria-label="simple table">
@@ -72,32 +74,32 @@ export const PublicVacDestShowAll = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {destinations.map((publicVacDest:PublicVacationDestination, index) => (
-                            <TableRow key={publicVacDest.id}>
+                        {destinations.map((privateVacDest:PrivateVacationDestination, index) => (
+                            <TableRow key={privateVacDest.id}>
                                 <TableCell component="th" scope="row">
                                     {index + 1}
                                 </TableCell>
-                                <TableCell align="center">{publicVacDest.geolocation}</TableCell>
-                                <TableCell align="center">{publicVacDest.title}</TableCell>
-                                <TableCell align="center"><a href={`${publicVacDest.imageURL}`}>Link</a></TableCell>
-                                <TableCell align="center">{publicVacDest.description}</TableCell>
-                                <TableCell align="center">{publicVacDest.arrival_date}</TableCell>
-                                <TableCell align="center">{publicVacDest.departure_date}</TableCell>
+                                <TableCell align="center">{privateVacDest.geolocation}</TableCell>
+                                <TableCell align="center">{privateVacDest.title}</TableCell>
+                                <TableCell align="center"><a href={`${privateVacDest.imageURL}`}>Link</a></TableCell>
+                                <TableCell align="center">{privateVacDest.description}</TableCell>
+                                <TableCell align="center">{privateVacDest.arrival_date}</TableCell>
+                                <TableCell align="center">{privateVacDest.departure_date}</TableCell>
                                 <TableCell align="right">
 										<IconButton
 											component={Link}
 											sx={{ mr: 3 }}
-											to={`/public-destination/${publicVacDest.id}`}>
-											<Tooltip title="View coach details" arrow>
+											to={`/private-destination/${privateVacDest.id}`}>
+											<Tooltip title="View destination details" arrow>
 												<ReadMoreIcon color="primary" />
 											</Tooltip>
 										</IconButton>
 
-										<IconButton component={Link} sx={{ mr: 3 }} to={`/public-destinations`}>
+										<IconButton component={Link} sx={{ mr: 3 }} to={`/private-destination/bucket-list`}>
 											<EditIcon />
 										</IconButton>
 
-										<IconButton component={Link} sx={{ mr: 3 }} to={`/public-destinations`}>
+										<IconButton component={Link} sx={{ mr: 3 }} to={`/private-destination/bucket-list`}>
 											<DeleteForeverIcon sx={{ color: "red" }} />
 										</IconButton>
 									</TableCell>
