@@ -11,42 +11,41 @@ import React from "react";
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 export const AppMenu = () => {
-    const location = useLocation();
-    const path = location.pathname;
+	const location = useLocation();
+	const path = location.pathname;
 
 	const [user, setUser] = useState<User>({
 		id: 1,
-        username: '',
-        email: '',
+		username: '',
+		email: '',
 		role: '',
-    });
+	});
 
 	useEffect(() => {
 		const intervalId = setInterval(() => {
 			const token = localStorage.getItem('token');
 			if (token !== null) {
-			const decoded: any = jwt_decode(token);
-			const user = decoded['user'];
-			// console.log(user);
-			setUser(user);
+				const decoded: any = jwt_decode(token);
+				const user = decoded['user'];
+				setUser(user);
 			}
 			else {
 				setUser({
-				id: 1,
-				username: '',
-				email: '',
-				role: '',
+					id: 1,
+					username: '',
+					email: '',
+					role: '',
 				})
 			}
 		}, 1000);
-	
+
 		// Clean up the interval when the component unmounts
 		return () => clearInterval(intervalId);
-	  }, []);
+	}, []);
 
-    return (
+	return (
 		<Box>
-			<AppBar style={{backgroundColor:"#B17BED"}}>
+			<AppBar style={{ backgroundColor: "#B17BED" }}>
 				<Toolbar>
 					<IconButton
 						component={Link}
@@ -64,66 +63,77 @@ export const AppMenu = () => {
 					{user.username === '' && (
 						<>
 							<Button
-							variant={path.startsWith("/register") ? "outlined" : "text"}
-							to="/register"
-							component={Link}
-							color="inherit"
-							sx={{ mr: 5 }}
-							startIcon={<HowToRegIcon />}>
-							Register
+								variant={path.startsWith("/register") ? "outlined" : "text"}
+								to="/register"
+								component={Link}
+								color="inherit"
+								sx={{ mr: 5 }}
+								startIcon={<HowToRegIcon />}>
+								Register
 							</Button>
 							<Button
-							variant={path.startsWith("/login") ? "outlined" : "text"}
-							to="/login"
-							component={Link}
-							color="inherit"
-							sx={{ mr: 5 }}
-							startIcon={<LoginIcon />}
+								variant={path.startsWith("/login") ? "outlined" : "text"}
+								to="/login"
+								component={Link}
+								color="inherit"
+								sx={{ mr: 5 }}
+								startIcon={<LoginIcon />}
 							>
-							Login
-							</Button>      
-						</>      		
+								Login
+							</Button>
+						</>
 					)}
 					{user.username !== '' && (
 						<Button
-						variant={path.startsWith("/logout") ? "outlined" : "text"}
-						to="/logout"
-						component={Link}
-						color="inherit"
-						sx={{ mr: 5 }}
-						startIcon={<LogoutIcon />}
+							variant={path.startsWith("/logout") ? "outlined" : "text"}
+							to="/logout"
+							component={Link}
+							color="inherit"
+							sx={{ mr: 5 }}
+							startIcon={<LogoutIcon />}
 						>
-						Logout
-						</Button>   	
+							Logout
+						</Button>
 					)}
 					{user.username !== '' && user.role === 'user' && (
 						<>
-						<Button
-						variant={path.startsWith("/private-destination/show-public") ? "outlined" : "text"}
-						to="/private-destination/show-public"
-						component={Link}
-						color="inherit"
-						sx={{ mr: 5 }}
-						startIcon={<FormatListBulletedIcon />}
-						>
-						Public Destinations
-						</Button>  
-						<Button
-						variant={path.startsWith("/private-destination/bucket-list") ? "outlined" : "text"}
-						to="/private-destination/bucket-list"
-						component={Link}
-						color="inherit"
-						sx={{ mr: 5 }}
-						startIcon={<FormatListBulletedIcon />}
-						>
-						Bucket List
-						</Button>  
-
-
+							<Button
+								variant={path.startsWith("/private-destination/show-public") ? "outlined" : "text"}
+								to="/private-destination/show-public"
+								component={Link}
+								color="inherit"
+								sx={{ mr: 5 }}
+								startIcon={<FormatListBulletedIcon />}
+							>
+								Public Destinations
+							</Button>
+							<Button
+								variant={path.startsWith("/private-destination/bucket-list") ? "outlined" : "text"}
+								to="/private-destination/bucket-list"
+								component={Link}
+								color="inherit"
+								sx={{ mr: 5 }}
+								startIcon={<FormatListBulletedIcon />}
+							>
+								Bucket List
+							</Button>
 						</>
-					
-						
 					)}
+
+					{user.username !== '' && user.role === 'admin' && (
+						<>
+							<Button
+								variant={path.startsWith("/public-destination/show-all") ? "outlined" : "text"}
+								to="/public-destination/show-all"
+								component={Link}
+								color="inherit"
+								sx={{ mr: 5 }}
+								startIcon={<FormatListBulletedIcon />}
+							>
+								Destination List
+							</Button>
+						</>
+					)}	
 				</Toolbar>
 			</AppBar>
 		</Box>
