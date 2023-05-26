@@ -81,7 +81,7 @@ export const PrivatecVacDestBucketList = () => {
                                 </TableCell>
                                 <TableCell align="center">{privateVacDest.geolocation}</TableCell>
                                 <TableCell align="center">{privateVacDest.title}</TableCell>
-                                <TableCell align="center"><a href={privateVacDest.imageURL}>Link</a></TableCell>
+                                <TableCell align="center"><a href={privateVacDest.imageURL} target="_blank">Link</a></TableCell>
                                 <TableCell align="center">{privateVacDest.description}</TableCell>
                                 <TableCell align="center">{privateVacDest.arrival_date}</TableCell>
                                 <TableCell align="center">{privateVacDest.departure_date}</TableCell>

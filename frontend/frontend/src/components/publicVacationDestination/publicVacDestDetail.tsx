@@ -31,7 +31,7 @@ export const PublicVacDestDetail = () => {
                 <h1 style={{textAlign:"center"}}>Destination Details</h1>
                 <p style={{textAlign:"left"}}>Location: {destination?.geolocation}</p>
                 <p style={{textAlign:"left"}}>Title: {destination?.title}</p>
-                <p style={{textAlign:"left"}}>Image: <a href={destination?.imageURL}>Link</a></p>
+                <p style={{textAlign:"left"}}>Image: <a href={destination?.imageURL} target="_blank">Link</a></p>
                 <p style={{textAlign:"left"}}>Description: {destination?.description}</p>
                 <p style={{textAlign:"left"}}>Arrival Date: {destination?.arrival_date}</p>
                 <p style={{textAlign:"left"}}>Departure Date: {destination?.departure_date}</p>
