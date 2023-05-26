@@ -109,7 +109,7 @@ export const PrivateVacDestShowAll = () => {
                                 </TableCell>
                                 <TableCell align="center">{publicVacDest.geolocation}</TableCell>
                                 <TableCell align="center">{publicVacDest.title}</TableCell>
-                                <TableCell align="center"><a href={publicVacDest.imageURL}>Link</a></TableCell>
+                                <TableCell align="center"><a href={publicVacDest.imageURL} target="_blank">Link</a></TableCell>
                                 <TableCell align="center">{publicVacDest.description}</TableCell>
                                 <TableCell align="center">{publicVacDest.arrival_date}</TableCell>
                                 <TableCell align="center">{publicVacDest.departure_date}</TableCell>

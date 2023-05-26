@@ -60,6 +60,7 @@ export const RegistrationForm = () => {
                     id="password"
                     label="Password"
                     variant="outlined"
+                    type="password"
                     fullWidth
                     sx={{ mb: 2, color: "whitesmoke !important" }}
                     onChange={(event) => setFormData({ ...formData, password: event.target.value })}
